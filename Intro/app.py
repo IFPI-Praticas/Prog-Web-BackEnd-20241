@@ -61,6 +61,13 @@ def verificarlogin():
     else:
         return "Erro de autenticação!"
 
+@app.route('/compras')
+def compras():
+    itens = ['Arroz', 'Feijão', 'Carne', 
+             'Peixe', 'Frango']
+    return render_template('compras.html',
+                           itens=itens)
+
 @app.route('/usuario/<user>')
 def usuario(user):
     esportes = ['Futebol', 'Judô','Basquete','Natação']
