@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ptbr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilos.css') }}">
+</head>
+<body>
+    <img src="{{ url_for('static', filename='imgs/contato.png') }} ">
+    <p>Contato:</p>
+    <p>
+        E-mail: {{ email }}<br>
+        Telefone: {{ tel }}
+      </p>
+</body>
+</html>

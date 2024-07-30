@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+</head>
+<body>
+    <form action="{{url_for('recebedados')}}" method="post">
+        <label for="nome"> Nome: </label>
+        <input type="text" name="nome"> <br>
+        <label for="email"> Email: </label>
+        <input type="text" name="email" > <br>
+
+        <label for="estado">Estado</label>
+        <select name="estado" >
+            <option value="pi">PI</option>
+            <option value="ma">MA</option>
+            <option value="ce">CE</option>
+            <option value="pa">PA</option>
+            <option value="rn">RN</option>
+        </select>
+        <br>
+        <p>
+        Formação Acadêmica: <br>
+        <input type="radio" name="formacao" value="medio"> Ensino Médio <br>
+        <input type="radio" name="formacao" value="fundamental"> Ensino Fundamental <br>
+        <input type="radio" name="formacao" value="superior"> Ensino Superior <br>
+    </p>
+
+    Modalidades de Interesse:
+    <p>
+    <input type="checkbox" name="modalidades" value="futebol"> Futebol <br>
+    <input type="checkbox" name="modalidades" value="futsal"> Futsal <br>
+    <input type="checkbox" name="modalidades" value="natacao"> Natação <br>
+    <input type="checkbox" name="modalidades" value="basquete"> Basquete <br>
+    <input type="checkbox" name="modalidades" value="bale"> Balé <br>
+</p>    
+    <button type="submit">Enviar</button>
+    </form>
+</body>
+</html>

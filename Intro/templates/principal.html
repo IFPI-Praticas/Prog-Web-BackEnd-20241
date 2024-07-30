@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Página Principal</title>
+  </head>
+  <body>
+    <p>Menu</p>
+    <ul>
+      <li><a href="#"> Início </a></li>
+      <li><a href="#"> Dashboard </a></li>
+      <li><a href="#"> Sobre </a></li>
+      {% if user == 'admin' %}
+      <li><a href="#"> Restrito </a></li>
+      {% endif%}
+      <br />
+
+      <br />
+      Esportes
+      <ul>
+        {% for item in range(100) %}
+        <li>{{item}}</li>
+        {% endfor %}
+      </ul>
+    </ul>
+  </body>
+</html>

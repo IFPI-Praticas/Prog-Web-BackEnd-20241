@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sua idade</title>
+  </head>
+  <body>
+    {% if idade >= 18 %}
+
+    <h2>Você tem {{idade}} anos, então você é maior de idade.</h2>
+
+    {% else %}
+
+    <h2>Você tem {{idade}} anos, então você é menor de idade.</h2>
+
+    {% endif %}
+  </body>
+</html>
