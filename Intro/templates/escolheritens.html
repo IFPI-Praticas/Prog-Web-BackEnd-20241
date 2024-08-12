@@ -6,13 +6,15 @@
     <title>Escolher Lista de Compras</title>
   </head>
   <body>
-    <form action="/compras">
+    <form action="/compras" , method="POST">
       Escolha suas compras: <br />
       <input type="checkbox" name="itens" value="Arroz" /> Arroz <br />
       <input type="checkbox" name="itens" value="Feijão" /> Feijão <br />
       <input type="checkbox" name="itens" value="Carne" /> Carne <br />
       <input type="checkbox" name="itens" value="Peixe" /> Peixe <br />
       <input type="checkbox" name="itens" value="Frango" /> Frango <br />
+
+      <button type="submit">Enviar</button>
     </form>
   </body>
 </html>

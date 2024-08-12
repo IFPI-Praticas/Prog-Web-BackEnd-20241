@@ -61,18 +61,33 @@ def verificarlogin():
     else:
         return "Erro de autenticação!"
 
-@app.route('/compras')
+@app.route('/compras', methods=['POST'])
 def compras():
-    itens = ['Arroz', 'Feijão', 'Carne', 
-             'Peixe', 'Frango']
+    itens = request.form.getlist('itens')
     return render_template('compras.html',
                            itens=itens)
+
+@app.route('/escolheritens')
+def escolheritens():
+    return render_template('escolheritens.html')
 
 @app.route('/usuario/<user>')
 def usuario(user):
     esportes = ['Futebol', 'Judô','Basquete','Natação']
     # print(esportes)
     return render_template('principal.html', user=user, esportes=esportes)
+
+@app.route('/lista_usuarios')
+def lista_usuarios():
+    listagem = [
+        ["Fulano da Silva", "(89) 929292929", 98, "Francisco Santos"],
+        ["Selecnino de Souza", "(89) 45474547",56, "Geminiano"],
+        ["Longinildo de Alencar", "(86) 123456789", 24, "Jaicós"],
+        ["Visuando Nogueira", "(89) 878778787", 45, "Picos"]
+    ]
+
+    return render_template('lista_usuarios.html', listagem=listagem)
+
 
 if __name__ == '__main__':
     app.run()
