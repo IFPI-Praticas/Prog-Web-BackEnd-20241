@@ -20,14 +20,13 @@ def cadastrar_enviar():
     valor = request.form['valor']
 
     nova_peca = {
-        'id': len(dados)+1,
+        'id': len(dados),
         'nome' : nome,
         'quantidade': quantidade,
         'valor': valor
     }
 
     dados.append(nova_peca)
-
     return redirect('/')
 
 

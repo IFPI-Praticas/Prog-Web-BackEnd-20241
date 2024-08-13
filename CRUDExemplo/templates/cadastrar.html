@@ -1,11 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastrar Peça</title>
-  </head>
-  <body>
+{% extends "base.html" %}
+
+{% block titulo %}
+  - Cadastro
+{% endblock %}
+
+{% block conteudo %}
     <h1>Cadastrar Peça</h1>
 
     <form action="/cadastrar_enviar" method="post">
@@ -14,5 +13,4 @@
       <p>Valor: <input type="number" step="0.01" name="valor" /></p>
       <p><button type="submit">Salvar</button></p>
     </form>
-  </body>
-</html>
+{% endblock %}
