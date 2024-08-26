@@ -29,6 +29,27 @@ def cadastrar_enviar():
     dados.append(nova_peca)
     return redirect('/')
 
+@app.route('/editar/<int:id_peca>')
+def editar(id_peca):
+    dados_peca = [peca for peca in dados if peca['id'] == id_peca][0]
+    
+    return render_template('editar.html', dados_peca=dados_peca)
+
+@app.route('/editar_enviar', methods=['POST'])
+def editar_enviar():
+    id_peca = request.form['id_peca']
+    nome = request.form['nome']
+    quantidade = request.form['quantidade']
+    valor = request.form['valor']
+
+
+    dados_peca = [peca for peca in dados if peca['id'] == int(id_peca)][0]
+
+    dados_peca['nome'] = nome
+    dados_peca['quantidade'] = quantidade
+    dados_peca['valor'] = valor
+
+    return redirect('/')
 
 if __name__ == '__main__':
     app.run()
