@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/estilos.css')}}"
+    />
+    <title>Sistema de Peças {% block titulo %} {% endblock %}</title>
+  </head>
+  <body>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/cadastrar">Cadastrar</a></li>
+    </ul>
+    {% with messages=get_flashed_messages() %} {% if messages %} {% for message
+    in messages %}
+    <div>{{message}}</div>
+    {% endfor %} {% endif %} {% endwith %} {% block conteudo %} {% endblock %}
+  </body>
+</html>
