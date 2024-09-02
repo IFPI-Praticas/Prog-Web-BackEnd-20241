@@ -15,9 +15,11 @@ migrate = Migrate(app, db)
 dados = [{'id': 0, 'nome': 'Bieleta', 'quantidade': 10, 'valor': 805.5},
          {'id': 1, 'nome': 'Coxim', 'quantidade': 16, 'valor': 1500.00}
          ]
+
 @app.route('/')
 def index():
-    return render_template('index.html', lista=dados)
+    lista_pecas = Peca.query.all()
+    return render_template('index.html', lista=lista_pecas)
 
 @app.route('/cadastrar')
 def cadastrar():
@@ -29,21 +31,19 @@ def cadastrar_enviar():
     quantidade = request.form['quantidade']
     valor = request.form['valor']
 
-    nova_peca = {
-        'id': len(dados),
-        'nome' : nome,
-        'quantidade': quantidade,
-        'valor': valor
-    }
+    p = Peca(nome, quantidade, valor)
 
-    dados.append(nova_peca)
+    db.session.add(p)
+    db.session.commit()
+    
     return redirect('/')
 
 @app.route('/editar/<int:id_peca>')
 def editar(id_peca):
-    dados_peca = [peca for peca in dados if peca['id'] == id_peca][0]
-    
-    return render_template('editar.html', dados_peca=dados_peca)
+
+    p = Peca.query.get(id_peca)
+
+    return render_template('editar.html', dados_peca=p)
 
 @app.route('/editar_enviar', methods=['POST'])
 def editar_enviar():
@@ -52,12 +52,22 @@ def editar_enviar():
     quantidade = request.form['quantidade']
     valor = request.form['valor']
 
+    p = Peca.query.get(id_peca)
+    p.nome = nome
+    p.quantidade = quantidade
+    p.valor = valor
 
-    dados_peca = [peca for peca in dados if peca['id'] == int(id_peca)][0]
+    db.session.add(p)
+    db.session.commit()
 
-    dados_peca['nome'] = nome
-    dados_peca['quantidade'] = quantidade
-    dados_peca['valor'] = valor
+    return redirect('/')
+
+@app.route('/excluir/<int:id_peca>')
+def excluir(id_peca):
+    p = Peca.query.get(id_peca)
+
+    db.session.delete(p)
+    db.session.commit()
 
     return redirect('/')
 
