@@ -1,0 +1,37 @@
+{% extends "base.html" %} {% block titulo %} - Inicial {% endblock %} {% block
+conteudo %}
+<h1>Bem vindo ao meu sistema de peças</h1>
+
+<table>
+  <thead>
+    <tr>
+      <td>ID</td>
+      <td>Usuario</td>
+      <td>Peca</td>
+      <td>Data</td>
+      <td>Editar</td>
+      <td>Excluir</td>
+    </tr>
+  </thead>
+  <tbody>
+    {% for item in pedidos %}
+    <tr>
+      <td>{{ item.id }}</td>
+      <td>{{ item.id_usuario }}</td>
+      <td>{{ item.id_peca }}</td>
+      <td>{{ item.data }}</td>
+      <td><a href="/pedidos/editar/{{ item.id }}"> Editar </a></td>
+      <td>
+        <a
+          href="/pedidos/excluir/{{ item.id }}"
+          onclick="return confirm ('Tem certeza que deseja apagar?')"
+        >
+          Excluir
+        </a>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+{% endblock %}
