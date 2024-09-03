@@ -12,9 +12,6 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 migrate = Migrate(app, db)
 
-dados = [{'id': 0, 'nome': 'Bieleta', 'quantidade': 10, 'valor': 805.5},
-         {'id': 1, 'nome': 'Coxim', 'quantidade': 16, 'valor': 1500.00}
-         ]
 
 @app.route('/')
 def index():
