@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+  - Inicial
+{% endblock %}
+
+
+{% block conteudo %}
+    <h1>Bem vindo ao meu sistema de peças</h1>
+
+    <table>
+      <thead>
+        <tr>
+          <td>ID</td>
+          <td>Nome</td>
+          <td>Quantidade</td>
+          <td>Valor</td>
+          <td>Editar</td>
+          <td>Excluir</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in lista %}
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.nome }}</td>
+          <td>{{ item.quantidade }}</td>
+          <td>{{ item.valor }}</td>
+          <td><a href="/editar/{{ item.id }}"> Editar </a></td>
+          <td><a href="/excluir/{{ item.id }}"> Excluir </a></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+{% endblock %}

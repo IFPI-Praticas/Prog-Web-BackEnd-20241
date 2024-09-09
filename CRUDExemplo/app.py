@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, Blueprint
 from database import db
 from flask_migrate import Migrate
 from models import Peca, Usuario, Pedido
+from routes.home import home_route
+from routes.peca import peca_route
 
 app = Flask(__name__)
 
@@ -12,14 +14,14 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 migrate = Migrate(app, db)
 
+app.register_blueprint(home_route)
+app.register_blueprint(peca_route, url_prefix='/peca')
+
 '''
     Peças
 '''
     
-@app.route('/pecas')
-def listagem_pecas():
-    lista_pecas = Peca.query.all()
-    return render_template('index.html', lista=lista_pecas)
+
 
 @app.route('/pecas/cadastrar')
 def cadastrar_pecas():
