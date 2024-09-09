@@ -15,7 +15,7 @@ db.init_app(app)
 migrate = Migrate(app, db)
 
 app.register_blueprint(home_route)
-app.register_blueprint(peca_route, url_prefix='/peca')
+app.register_blueprint(peca_route, url_prefix='/pecas')
 
 '''
     Peças
