@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, redirect
 from database import db
 from flask_migrate import Migrate
-from models import Peca
+from models import Peca, Usuario, Pedido
 
 app = Flask(__name__)
 
@@ -12,18 +12,21 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 migrate = Migrate(app, db)
 
-
-@app.route('/')
-def index():
+'''
+    Peças
+'''
+    
+@app.route('/pecas')
+def listagem_pecas():
     lista_pecas = Peca.query.all()
     return render_template('index.html', lista=lista_pecas)
 
-@app.route('/cadastrar')
-def cadastrar():
+@app.route('/pecas/cadastrar')
+def cadastrar_pecas():
     return render_template('cadastrar.html')
 
-@app.route('/cadastrar_enviar', methods=['POST'])
-def cadastrar_enviar():
+@app.route('/pecas/cadastrar_enviar', methods=['POST'])
+def cadastrar_enviar_pecas():
     nome = request.form['nome']
     quantidade = request.form['quantidade']
     valor = request.form['valor']
@@ -33,7 +36,7 @@ def cadastrar_enviar():
     db.session.add(p)
     db.session.commit()
     
-    return redirect('/')
+    return redirect('/pecas')
 
 @app.route('/editar/<int:id_peca>')
 def editar(id_peca):
@@ -67,6 +70,34 @@ def excluir(id_peca):
     db.session.commit()
 
     return redirect('/')
+
+'''
+    Usuários
+'''
+@app.route('/usuarios')
+def listagem_usuarios():
+    lista_usuarios = Usuario.query.all()
+    return render_template('listar_usuarios.html', lista=lista_usuarios)
+
+@app.route('/usuario/cadastrar', methods=['GET','POST'])
+def cadastrar_usuario():
+    if request.method == 'GET':
+        return render_template('cadastrar_usuario.html')
+    
+    if request.method == 'POST':
+        nome = request.form['nome']
+        email = request.form['email']
+
+        u = Usuario(nome, email)
+
+        db.session.add(u)
+        db.session.commit()
+        
+        return redirect('/usuarios')
+
+'''
+    Pedidos
+'''
 
 if __name__ == '__main__':
     app.run()

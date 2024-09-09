@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+  - Cadastro
+{% endblock %}
+
+{% block conteudo %}
+    <h1>Cadastrar Usuario</h1>
+
+    <form action="/usuario/cadastrar" method="post">
+      <p>Nome: <input type="text" name="nome" /></p>
+      <p>Email: <input type="email" name="email" /></p>
+      <p><button type="submit">Salvar</button></p>
+    </form>
+{% endblock %}
