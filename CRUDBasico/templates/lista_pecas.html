@@ -1,0 +1,52 @@
+{% extends "base.html" %} {% block titulo %} - Inicial {% endblock %} {% block
+conteudo %}
+
+<div class="row justify-content-md-center">
+  <div class="col-md-auto"><h4>Módulo de Peças</h4></div>
+</div>
+
+<div class="row justify-content-md-center"></div>
+
+</div>
+
+
+<div class="row justify-content-md-center">
+  <div class="col-md-auto">
+    <p>
+      <a href="/peca/cadastrar" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Cadastrar Peça</a>
+    </p>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Valor</th>
+          <th scope="col">Quantidade</th>
+          <th scope="col">Editar</th>
+          <th scope="col">Excluir</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in lista %}
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.nome }}</td>
+          <td>{{ item.quantidade }}</td>
+          <td>{{ item.valor }}</td>
+          <td><a href="/peca/editar/{{ item.id }}"> Editar </a></td>
+          <td>
+            <a
+              href="/peca/excluir/{{ item.id }}"
+              onclick="return confirm ('Tem certeza que deseja apagar?')"
+            >
+              Excluir
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

@@ -2,7 +2,7 @@
 conteudo %}
 <h1>Editar Peça</h1>
 
-<form action="/editar_enviar" method="post">
+<form action="/peca/editar/{{peca.id}}" method="post">
   <p><input type="hidden" name="id_peca" value="{{peca.id}}" /></p>
   <p>Nome: <input type="text" name="nome" value="{{peca.nome}}" /></p>
   <p>
