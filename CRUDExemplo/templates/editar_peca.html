@@ -7,7 +7,7 @@
 {% block conteudo %}
     <h1>Editar Peça</h1>
 
-    <form action="/editar_enviar" method="post">
+    <form action="/pecas/editar_enviar" method="post">
       <p><input type="hidden" name="id_peca" value="{{dados_peca['id']}}"></p>
       <p>Nome: <input type="text" name="nome" value="{{dados_peca['nome']}}"/></p>
       <p>Quantidade: <input type="number" name="quantidade" value="{{dados_peca['quantidade']}}"/></p>

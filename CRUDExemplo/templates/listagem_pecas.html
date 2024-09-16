@@ -7,7 +7,9 @@
 
 {% block conteudo %}
     <h1>Bem vindo ao meu sistema de peças</h1>
-
+    <p>
+      <a href="/pecas/cadastrar">Cadastrar Peça</a>
+    </p>
     <table>
       <thead>
         <tr>
@@ -26,8 +28,8 @@
           <td>{{ item.nome }}</td>
           <td>{{ item.quantidade }}</td>
           <td>{{ item.valor }}</td>
-          <td><a href="/editar/{{ item.id }}"> Editar </a></td>
-          <td><a href="/excluir/{{ item.id }}"> Excluir </a></td>
+          <td><a href="/pecas/editar/{{ item.id }}"> Editar </a></td>
+          <td><a href="/pecas/excluir/{{ item.id }}"> Excluir </a></td>
         </tr>
         {% endfor %}
       </tbody>

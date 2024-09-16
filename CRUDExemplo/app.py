@@ -18,62 +18,6 @@ app.register_blueprint(home_route)
 app.register_blueprint(peca_route, url_prefix='/pecas')
 
 '''
-    Peças
-'''
-    
-
-
-@app.route('/pecas/cadastrar')
-def cadastrar_pecas():
-    return render_template('cadastrar.html')
-
-@app.route('/pecas/cadastrar_enviar', methods=['POST'])
-def cadastrar_enviar_pecas():
-    nome = request.form['nome']
-    quantidade = request.form['quantidade']
-    valor = request.form['valor']
-
-    p = Peca(nome, quantidade, valor)
-
-    db.session.add(p)
-    db.session.commit()
-    
-    return redirect('/pecas')
-
-@app.route('/editar/<int:id_peca>')
-def editar(id_peca):
-
-    p = Peca.query.get(id_peca)
-
-    return render_template('editar.html', dados_peca=p)
-
-@app.route('/editar_enviar', methods=['POST'])
-def editar_enviar():
-    id_peca = request.form['id_peca']
-    nome = request.form['nome']
-    quantidade = request.form['quantidade']
-    valor = request.form['valor']
-
-    p = Peca.query.get(id_peca)
-    p.nome = nome
-    p.quantidade = quantidade
-    p.valor = valor
-
-    db.session.add(p)
-    db.session.commit()
-
-    return redirect('/')
-
-@app.route('/excluir/<int:id_peca>')
-def excluir(id_peca):
-    p = Peca.query.get(id_peca)
-
-    db.session.delete(p)
-    db.session.commit()
-
-    return redirect('/')
-
-'''
     Usuários
 '''
 @app.route('/usuarios')
