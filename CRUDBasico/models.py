@@ -1,4 +1,5 @@
-from database import db
+from utils import db
+from flask_login import UserMixin
 
 class Peca(db.Model):
     __tablename__ = 'pecas'
@@ -16,16 +17,18 @@ class Peca(db.Model):
     def __repr__(self):
         return "<Peca {}>".format(self.nome)
     
-class Usuario(db.Model):
+class Usuario(db.Model, UserMixin):
     __tablename__ = 'usuarios'
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100))
     email = db.Column(db.String(100))
+    senha = db.Column(db.String(100))
     pedidos_usuario = db.relationship('Pedido', backref='usuario')
     
-    def __init__(self, nome, email):
+    def __init__(self, nome, email, senha):
         self.nome = nome
         self.email = email
+        self.senha = senha
 
     def __repr__(self):
         return "<Usuario {}>".format(self.nome)

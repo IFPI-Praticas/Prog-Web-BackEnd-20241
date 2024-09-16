@@ -1,5 +1,5 @@
-from flask import Blueprint, render_template, request, redirect, url_for
-from database import db
+from flask import Blueprint, render_template, request, redirect, url_for, flash
+from utils import db
 from models import Peca
 
 peca_route = Blueprint('peca', __name__)
@@ -22,7 +22,7 @@ def cadastrar():
         nova_peca = Peca(nome, quantidade, valor)
         db.session.add(nova_peca)
         db.session.commit()
-
+        flash('Peça cadastrada com sucesso!', 'success')
         return redirect(url_for('peca.index'))
 
 @peca_route.route('/editar/<int:peca_id>', methods=['GET', 'POST'])
@@ -41,6 +41,8 @@ def editar(peca_id):
         peca.valor = request.form['valor']
 
         db.session.commit()
+
+        flash('Peça editada com sucesso!', 'success')
     
         return redirect(url_for('peca.index'))
 
@@ -51,5 +53,6 @@ def excluir(peca_id):
 
     db.session.delete(peca)
     db.session.commit()
-    
+
+    flash('Peça deletada com sucesso!', 'success')
     return redirect(url_for('peca.index'))

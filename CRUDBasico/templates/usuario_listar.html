@@ -1,35 +1,50 @@
 {% extends "base.html" %} {% block titulo %} - Inicial {% endblock %} {% block
 conteudo %}
-<h1>Bem vindo ao meu sistema de peças</h1>
+<div class="row justify-content-md-center">
+  <div class="col-md-auto"><h4>Módulo de Usuários</h4></div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <td>ID</td>
-      <td>Nome</td>
-      <td>Email</td>
-      <td>Editar</td>
-      <td>Excluir</td>
-    </tr>
-  </thead>
-  <tbody>
-    {% for item in lista %}
-    <tr>
-      <td>{{ item.id }}</td>
-      <td>{{ item.nome }}</td>
-      <td>{{ item.email }}</td>
-      <td><a href="/usuario/editar/{{ item.id }}"> Editar </a></td>
-      <td>
-        <a
-          href="/usuario/excluir/{{ item.id }}"
-          onclick="return confirm ('Tem certeza que deseja apagar?')"
-        >
-          Excluir
-        </a>
-      </td>
-    </tr>
-    {% endfor %}
-  </tbody>
-</table>
+
+<div class="row justify-content-md-center"></div>
+
+</div>
+
+
+<div class="row justify-content-md-center">
+  <div class="col-md-auto">
+    <p>
+      <a href="/usuario/cadastrar" class="btn btn-primary btn-lg" role="button" aria-pressed="true">Cadastrar Usuário</a>
+    </p>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Email</th>
+          <th scope="col">Editar</th>
+          <th scope="col">Excluir</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in lista %}
+        <tr>
+          <td>{{ item.id }}</td>
+          <td>{{ item.nome }}</td>
+          <td>{{ item.valor }}</td>
+          <td><a href="/usuario/editar/{{ item.id }}"> Editar </a></td>
+          <td>
+            <a
+              href="/usuario/excluir/{{ item.id }}"
+              onclick="return confirm ('Tem certeza que deseja apagar?')"
+            >
+              Excluir
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
 
 {% endblock %}

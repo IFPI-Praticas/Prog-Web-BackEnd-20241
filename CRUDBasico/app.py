@@ -1,11 +1,12 @@
 from flask import Flask, render_template, redirect, request, flash
-from database import db
+from utils import db, lm
 from flask_migrate import Migrate
 from models import Peca, Usuario, Pedido
 from datetime import date
 
 from routes.home import home_route
 from routes.peca import peca_route
+from routes.usuario import usuario_route
 
 app = Flask(__name__)
 
@@ -16,66 +17,17 @@ app.config['SQLALCHEMY_DATABASE_URI'] = conexao
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)
+lm.init_app(app)
 migrate = Migrate(app,db)
 
 app.register_blueprint(home_route)
 app.register_blueprint(peca_route, url_prefix='/peca')
+app.register_blueprint(usuario_route, url_prefix='/usuario')
 
-## Usuarios
-@app.route('/usuarios')
-def listar_usuarios():
-    usuarios = Usuario.query.all()
-    return render_template('usuario_listar.html', lista=usuarios)
-
-@app.route('/usuarios/cadastrar')
-def cadastrar_usuario():
-    return render_template('usuario_cadastrar.html')
-
-@app.route('/usuarios/cadastrar_enviar', methods=['POST'])
-def cadastrar_usuario_enviar():
-    nome = request.form['nome']
-    email = request.form['email']
-
-    novo_usuario = Usuario(nome, email)
-    db.session.add(novo_usuario)
-    db.session.commit()
-
-    flash('Cadastrado com sucesso!')
-
-    return redirect('/usuarios')
-
-
-@app.route('/usuario/editar/<int:usuario_id>')
-def editar_usuario(usuario_id):
-    usuario = Usuario.query.get(usuario_id)
-    return render_template('usuario_editar.html', usuario=usuario)
-
-@app.route('/usuario/editar_enviar', methods=['POST'])
-def editar_usuario_enviar():
-    usuario_id = int(request.form['id_usuario'])
-    
-    usuario = Usuario.query.get(usuario_id)
-
-    usuario.nome = request.form['nome']
-    usuario.email = request.form['email']
-
-    db.session.commit()
-    
-    # adiciona uma mensagem de sucesso ao usuário
-    flash('Cadastro editado com sucesso!')
-    return redirect('/usuarios')
-
-
-@app.route('/usuario/excluir/<int:usuario_id>')
-def excluir_usuario(usuario_id):
-    usuario = Usuario.query.get(usuario_id)
-
-    db.session.delete(usuario)
-    db.session.commit()
-    
-    flash('Item excluído com sucesso!')
-    return redirect('/usuarios')
-
+@app.errorhandler(401)
+def acesso_negado(e):
+    # note that we set the 404 status explicitly
+    return render_template('acesso_negado.html'), 404
 
 ## Pedidos
 @app.route('/pedido/create', methods=['GET','POST'])

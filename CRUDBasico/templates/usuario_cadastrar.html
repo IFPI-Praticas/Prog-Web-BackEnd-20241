@@ -1,10 +1,57 @@
 {% extends "base.html" %} {% block titulo %} - Cadastro {% endblock %} {% block
 conteudo %}
-<h1>Cadastrar Peça</h1>
+<div class="row justify-content-md-center">
+  <div class="col-md-auto"><h4>Módulo de Usuários</h4></div>
+</div>
+<div class="row justify-content-md-center">
+  <div class="col-lg-6">
+    <form action="/usuario/cadastrar_enviar" method="POST">
+      <div class="form-group">
+        <label for="nome">Nome: </label>
+        <input
+          type="text"
+          class="form-control"
+          id="nome"
+          name="nome"
+          aria-describedby="nomeHelp"
+          placeholder="Digite nome do usuário"
+        />
+        <small id="nomeHelp" class="form-text text-muted">Seu nome</small>
+      </div>
 
-<form action="/usuarios/cadastrar_enviar" method="post">
-  <p>Nome: <input type="text" name="nome" /></p>
-  <p>Email: <input type="email" name="email" /></p>
-  <p><button type="submit">Salvar</button></p>
-</form>
+      <div class="form-group">
+        <label for="email">Email: </label>
+        <input
+          type="email"
+          class="form-control"
+          id="email"
+          name="email"
+          aria-describedby="emailHelp"
+          placeholder="Digite o email do usuário"
+        />
+        <small id="valorHelp" class="form-text text-muted"
+          >Email do usuário</small
+        >
+      </div>
+
+      <div class="form-group">
+        <label for="senha">Senha: </label>
+        <input
+          type="password"
+          step="0.01"
+          class="form-control"
+          id="senha"
+          name="senha"
+          aria-describedby="senhalHelp"
+          placeholder="A senha do usuário"
+        />
+        <small id="valorHelp" class="form-text text-muted"
+          >A senha deve conter</small
+        >
+      </div>
+
+      <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
 {% endblock %}
