@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+  - Editar
+{% endblock %}
+
+{% block conteudo %}
+    <h1>Editar Usuário</h1>
+
+    <form action="/usuarios/editar_enviar" method="post">
+      <p><input type="hidden" name="id_usuario" value="{{dados_usuario['id']}}"></p>
+      <p>Nome: <input type="text" name="nome" value="{{dados_usuario['nome']}}"/></p>
+      <p>Email: <input type="email" name="email" value="{{dados_usuario['email']}}"/></p>
+      <p>Senha: <input type="password" name="senha" value="{{dados_usuario['senha']}}"/></p>
+      <p><button type="submit">Salvar</button></p>
+    </form>
+{% endblock %}
