@@ -1,4 +1,5 @@
-from database import db
+from utils import db
+from flask_login import UserMixin
 
 class Peca(db.Model):
     __tablename__ = 'pecas'
@@ -17,7 +18,7 @@ class Peca(db.Model):
     def __repr__(self) -> str:
         return "<Peca {}>".format(self.nome)
     
-class Usuario(db.Model):
+class Usuario(db.Model, UserMixin):
     __tablename__ = 'usuarios'
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String(100))

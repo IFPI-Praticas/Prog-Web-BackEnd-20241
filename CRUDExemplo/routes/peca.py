@@ -1,5 +1,5 @@
 from flask import Blueprint, render_template, request, redirect, url_for, flash
-from database import db
+from utils import db
 from models import Peca
 
 peca_route = Blueprint('peca', __name__)
